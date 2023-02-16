@@ -1,26 +1,27 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="准备用 Vue3 搭个博客，先试试编译完好不好使"/>
-</template>
+<template><router-view></router-view></template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import bus from './mitt/event'
+import { useRouter } from 'vue-router';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  setup() {
+    const router = useRouter();
+
+    //#region  路由跳转（全局可调用）
+    let go = (routeName) => {
+      router.push(routeName)
+    };
+    bus.on('go', go);
+    //#endregion
+  },
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+* {
+  margin: 0;
+  padding: 0;
 }
 </style>
